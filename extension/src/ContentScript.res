@@ -360,10 +360,12 @@ let lookupAndShow = (~repo: string, ~symbol: string, ~span: Dom.element): unit =
       })
       ->Promise.catch(err => {
         Console.log3("[elm-peek] fetch failed", symbol, err)
-        TooltipController.show(
+        // Network-layer failure almost always means the local server isn't
+        // running. Surface a dedicated state with the start command so the
+        // user doesn't have to remember it.
+        TooltipController.showServerDown(
           c,
           ~span,
-          ~response=Error("network error: " ++ symbol),
           ~repo,
           ~ref=?refHint,
           ~clickedSymbol=symbol,

@@ -163,6 +163,21 @@ let stylesheet = `
   color: #59636e;
 }
 .elm-peek-error { color: #cf222e; }
+.elm-peek-server-down { padding: 4px 0; }
+.elm-peek-server-down-title {
+  font-weight: 600;
+  color: #cf222e;
+  margin-bottom: 6px;
+}
+.elm-peek-server-down-detail { color: #59636e; line-height: 1.6; }
+.elm-peek-server-down-cmd {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  background: #f6f8fa;
+  border: 1px solid #d0d7de;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 11px;
+}
 .elm-peek-close {
   position: absolute;
   top: 4px;
@@ -251,6 +266,13 @@ let stylesheet = `
   .elm-peek-source .token.hvariable { color: #f0f6fc; }
   .elm-peek-source .token.import-statement { color: #ff7b72; }
   .elm-peek-link { color: #58a6ff; }
+  .elm-peek-server-down-title { color: #ff7b72; }
+  .elm-peek-server-down-detail { color: #9198a1; }
+  .elm-peek-server-down-cmd {
+    background: #15191f;
+    border-color: #30363d;
+    color: #f0f6fc;
+  }
 }
 `
 
@@ -444,6 +466,28 @@ let mountAndRender = (
     c.visible := true
     installListeners(c)
   }
+}
+
+let showServerDown = (
+  c: controller,
+  ~span: Dom.element,
+  ~repo: option<string>=?,
+  ~ref: option<string>=?,
+  ~clickedSymbol: option<string>=?,
+  ~onClose: unit => unit=() => (),
+): unit => {
+  c.model := Tooltip.update(Tooltip.initialModel, Tooltip.ServerUnreachable)
+  c.currentRepo := repo
+  c.currentRef := ref
+  c.currentClickedSymbol := clickedSymbol
+  let dispatch = dispatchOf(c, ~onClose=() => {
+    dismiss(c)
+    onClose()
+  })
+  mountAndRender(c, ~span, ~onClose=() => {
+    dismiss(c)
+    onClose()
+  }, ~dispatch)
 }
 
 let showLoading = (

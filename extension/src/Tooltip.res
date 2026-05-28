@@ -27,6 +27,10 @@ type state =
   | Loading
   | Ok(array<Wire.definition>)
   | NotFound
+  // The fetch failed at the network layer — almost always means the local
+  // server isn't running. Distinct from Error(_) so the view can render a
+  // call-to-action with the start command.
+  | ServerDown
   | Error(string)
 
 type model = {
@@ -37,6 +41,7 @@ type model = {
 type msg =
   | Triggered(Wire.response)
   | DecodeFailed(string)
+  | ServerUnreachable
   | Pin
   | Dismiss
 
@@ -50,6 +55,7 @@ let update = (model: model, msg: msg): model =>
   | Triggered(Wire.Err({reason: Wire.NotFound, _})) => {...model, state: NotFound}
   | Triggered(Wire.Err({detail, _})) => {...model, state: Error(detail)}
   | DecodeFailed(detail) => {...model, state: Error(detail)}
+  | ServerUnreachable => {...model, state: ServerDown}
   | Pin => {...model, mode: Pinned}
   | Dismiss => model // controller unmounts; state is moot
   }
@@ -182,6 +188,19 @@ let make = (
     <div className="elm-peek-loading"> {React.string("Loading…")} </div>
   | NotFound =>
     <div className="elm-peek-empty"> {React.string("No definition found.")} </div>
+  | ServerDown =>
+    <div className="elm-peek-server-down">
+      <div className="elm-peek-server-down-title">
+        {React.string("elm-peek server isn't running")}
+      </div>
+      <div className="elm-peek-server-down-detail">
+        {React.string("Start it with ")}
+        <code className="elm-peek-server-down-cmd">
+          {React.string("bun run dev:server")}
+        </code>
+        {React.string(" from your elm-peek checkout.")}
+      </div>
+    </div>
   | Error(msg) =>
     <div className="elm-peek-error"> {React.string("Error: " ++ msg)} </div>
   | Ok(results) =>
