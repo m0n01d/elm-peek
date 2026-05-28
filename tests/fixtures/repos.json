@@ -1,0 +1,4 @@
+{
+  "org/foo": "tests/fixtures/elm",
+  "org/elm-browser": "tests/fixtures/elm"
+}

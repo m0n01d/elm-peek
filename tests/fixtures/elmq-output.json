@@ -1,0 +1,3 @@
+{"decl":"InstanceStep","decl_kind":"type_alias","end_line":8,"file":"tests/fixtures/elm/src/Baz.elm","match_count":1,"module":"Baz","source":"type alias InstanceStep =\n    { kind : String }","start_line":7}
+{"decl":"InstanceStepId","decl_kind":"type_alias","end_line":5,"file":"tests/fixtures/elm/src/Foo.elm","match_count":1,"module":"Foo","source":"type alias InstanceStepId =\n    String","start_line":4}
+{"decl":"InstanceStep","decl_kind":"type_alias","end_line":12,"file":"tests/fixtures/elm/src/Foo.elm","match_count":1,"module":"Foo","source":"type alias InstanceStep =\n    { id : InstanceStepId\n    , label : String\n    , done : Bool\n    }","start_line":8}

@@ -1,0 +1,29 @@
+<!--
+  Minimal GitHub blob-view fixture. Real captures should be substituted by
+  Slice 3 (P3 Track D) — this stub exists so TokenScan_test can be wired up
+  in P0 without a network round-trip to github.com.
+
+  Structure mimics the rendered <span> table GitHub uses. Filter target:
+  capitalized identifiers OUTSIDE .pl-s (strings) and .pl-c (comments).
+
+  Expected matches when scanning: InstanceStep, InstanceStepId, String,
+  Bool, True. Decoys (must NOT match): "Hello" inside .pl-s,
+  "TODO" inside .pl-c, "lowercaseStart", "snake_case".
+-->
+<html>
+  <body>
+    <div data-target="file-view.contents">
+      <table>
+        <tr><td><span class="pl-k">type alias</span> <span class="pl-c1">InstanceStep</span> = </td></tr>
+        <tr><td>    { id : <span class="pl-c1">InstanceStepId</span></td></tr>
+        <tr><td>    , label : <span class="pl-c1">String</span></td></tr>
+        <tr><td>    , done : <span class="pl-c1">Bool</span></td></tr>
+        <tr><td>    , flag = <span class="pl-c1">True</span></td></tr>
+        <tr><td>    -- <span class="pl-c">TODO comment</span></td></tr>
+        <tr><td>    , greeting = <span class="pl-s">"Hello"</span></td></tr>
+        <tr><td>    , local = <span>lowercaseStart</span></td></tr>
+        <tr><td>    , snake = <span>snake_case</span></td></tr>
+      </table>
+    </div>
+  </body>
+</html>

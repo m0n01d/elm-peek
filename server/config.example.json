@@ -1,0 +1,4 @@
+{
+  "_comment": "Copy to ~/.config/elm-peek/repos.json. Keys are GitHub org/name (case-sensitive). Values are absolute paths to your local checkouts.",
+  "your-org/your-repo": "/Users/you/code/your-repo"
+}

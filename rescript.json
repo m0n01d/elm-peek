@@ -1,0 +1,25 @@
+{
+  "name": "elm-peek",
+  "sources": [
+    { "dir": "shared/src", "subdirs": true },
+    { "dir": "extension/src", "subdirs": true },
+    { "dir": "server/src", "subdirs": true }
+  ],
+  "package-specs": [
+    {
+      "module": "esmodule",
+      "in-source": true
+    }
+  ],
+  "suffix": ".res.mjs",
+  "dependencies": [
+    "@rescript/react"
+  ],
+  "jsx": {
+    "version": 4,
+    "mode": "automatic"
+  },
+  "warnings": {
+    "error": "+101"
+  }
+}

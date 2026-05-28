@@ -1,0 +1,31 @@
+<!--
+  Minimal GitHub PR-diff-view fixture. Real captures should be substituted
+  by Slice 3 (P3 Track D). Structure: each diff line is its own row with
+  +/- gutters; capitalized identifier spans appear inside the right-hand
+  cell. Hover targets should be discovered on both + and - lines.
+
+  Expected matches when scanning: InstanceStep, InstanceStepId, String,
+  Process, Result. Decoys: "TODO" inside .pl-c, "Error" inside .pl-s.
+-->
+<html>
+  <body>
+    <div class="diff-table">
+      <div class="js-file" data-tagsearch-path="src/Process.elm">
+        <table>
+          <tr class="blob-num-deletion"><td>-</td>
+            <td><span class="pl-k">type</span> <span class="pl-c1">Process</span></td></tr>
+          <tr class="blob-num-addition"><td>+</td>
+            <td><span class="pl-k">type alias</span> <span class="pl-c1">InstanceStep</span> =</td></tr>
+          <tr class="blob-num-addition"><td>+</td>
+            <td>    { id : <span class="pl-c1">InstanceStepId</span></td></tr>
+          <tr class="blob-num-addition"><td>+</td>
+            <td>    , status : <span class="pl-c1">Result</span> <span class="pl-c1">String</span> <span class="pl-c1">Process</span></td></tr>
+          <tr class="blob-num-context"><td> </td>
+            <td>    -- <span class="pl-c">TODO comment</span></td></tr>
+          <tr class="blob-num-context"><td> </td>
+            <td>    , msg = <span class="pl-s">"Error happened"</span></td></tr>
+        </table>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,3 @@
+# Per-test happy-dom registration is used by extension test files
+# (TokenScan_test, Hover_test, Tooltip_test, etc.) in their own beforeAll blocks,
+# not via a global preload — server integration tests need Bun's native fetch.

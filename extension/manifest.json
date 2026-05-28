@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "elm-peek",
+  "version": "0.0.1",
+  "description": "Hover/click an Elm type on GitHub to see its definition inline.",
+  "permissions": [],
+  "host_permissions": [
+    "https://github.com/*",
+    "http://127.0.0.1:42069/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://github.com/*/blob/*",
+        "https://github.com/*/pull/*",
+        "https://github.com/*/commit/*"
+      ],
+      "js": ["contentScript.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

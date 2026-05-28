@@ -1,0 +1,34 @@
+{
+  "name": "elm-peek",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:res": "rescript",
+    "build:res:watch": "rescript -w",
+    "clean": "rescript clean",
+    "dev:server": "bun --watch run server/src/Server.res.mjs",
+    "build:ext": "vite build",
+    "dev:ext": "vite build --watch",
+    "test": "bun test",
+    "test:watch": "bun test --watch"
+  },
+  "dependencies": {
+    "@rescript/react": "^0.15.0",
+    "prismjs": "^1.30.0",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "devDependencies": {
+    "@happy-dom/global-registrator": "^20.9.0",
+    "@types/bun": "^1.1.10",
+    "@types/chrome": "^0.0.270",
+    "happy-dom": "^20.9.0",
+    "rescript": "^12.3.0",
+    "vite": "^8.0.14",
+    "vite-plugin-static-copy": "^4.1.0"
+  },
+  "trustedDependencies": [
+    "rescript"
+  ]
+}
