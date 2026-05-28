@@ -416,7 +416,18 @@ let handleDocClick = (ev: Dom.event): unit =>
   switch eventTarget(ev)->Null.toOption {
   | Some(target) =>
     let txt = String.trim(textContent(target))
-    if candidateRe->RegExp.test(txt) && !TokenScan.isInsideStringOrComment(target) {
+    // Require the click to land inside a <code> or <pre> ancestor. GitHub
+    // wraps every syntax-highlighted token in <code> on both blob and diff
+    // views; UI elements (SSO "Continue" buttons, header links, etc.) are
+    // never in that context, so this filters out the universe of non-code
+    // clicks that happen to have capitalized text content. Without this
+    // gate we hijacked any button labeled "Continue", "Sign", "Save", …
+    let inCode = target->closest("code, pre")->Null.toOption !== None
+    if (
+      inCode &&
+      candidateRe->RegExp.test(txt) &&
+      !TokenScan.isInsideStringOrComment(target)
+    ) {
       stopPropagation(ev)
       preventDefault(ev)
       switch extractRepo(pathname) {
